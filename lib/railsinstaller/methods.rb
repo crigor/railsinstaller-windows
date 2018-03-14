@@ -193,7 +193,7 @@ module RailsInstaller
       if File.exist?(File.join(Stage, file))
         FileUtils.mv(
           File.join(Stage, file),
-          File.join(Stage, Ruby233.rename, "bin", file)
+          File.join(Stage, Ruby242.rename, "bin", file)
         )
       end
     end
@@ -207,7 +207,7 @@ module RailsInstaller
       if File.exist?(File.join(Stage, file))
         FileUtils.cp(
           File.join(Stage, PostgresServer.target, "bin", file),
-          File.join(Stage, Ruby233.rename, "bin", file)
+          File.join(Stage, Ruby242.rename, "bin", file)
         )
       end
     end
@@ -239,8 +239,8 @@ module RailsInstaller
 
   def self.stage_gems
     section Gems
-    build_gems(File.join(Stage, Ruby233.rename), Gems.list)
-    build_gem(File.join(Stage, Ruby233.rename), "pg", {
+    build_gems(File.join(Stage, Ruby242.rename), Gems.list)
+    build_gem(File.join(Stage, Ruby242.rename), "pg", {
       :args => [
           "--",
           "--with-pg-include=#{File.join(Stage, "pgsql", "include")}",
@@ -250,7 +250,7 @@ module RailsInstaller
   end
 
   def self.fix_batch_files
-    ruby_path = File.join(Stage, Ruby233.rename)
+    ruby_path = File.join(Stage, Ruby242.rename)
     bin_path = File.join(ruby_path, "bin/")
 	  filenames = Dir.glob("#{bin_path}*.bat")
 	  filenames.each do |filename|
@@ -262,6 +262,14 @@ module RailsInstaller
 			  file.write fixed
 		  }
 	  end
+  end
+
+  def self.stage_sample_application
+    #section SampleApp
+    sites_path = File.join(Stage, "Sites")
+    sampleapp_path = File.join(Stage, "Sites", "sampleapp5.2.0.beta1")
+    FileUtils.rm_rf(sampleapp_path) if File.exist?(sampleapp_path)
+    ruby_binary("rails", "new --skip-active-storage", "sampleapp5.2.0.beta1", File.join(Stage, Ruby242.rename), sites_path)
   end
 
   def self.stage_todo_application
@@ -282,9 +290,9 @@ module RailsInstaller
       FileUtils.rm_rf(File.join(todo_path, ".git"))
     end
 
-    gem_install File.join(Stage, Ruby233.rename), "bundler", :version => "1.15.3"
+    gem_install File.join(Stage, Ruby242.rename), "bundler", :version => "1.16.0"
 
-    ruby_binary("bundle", "install", "", File.join(Stage, Ruby233.rename), File.join(applications_path, "todo"))
+    ruby_binary("bundle", "install", "", File.join(Stage, Ruby242.rename), File.join(applications_path, "todo"))
   end
 
   def self.stage_rails_sample_application

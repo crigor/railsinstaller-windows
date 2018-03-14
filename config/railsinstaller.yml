@@ -7,10 +7,10 @@
     - rake
     -
       :name: bundler
-      :version: "1.15.3"
+      :version: "1.16.0"
     -
       :name: rails
-      :version: "5.1.3"
+      :version: "5.2.0.beta1"
     -
       :name: activerecord-sqlserver-adapter
       :version: "5.1.1"
@@ -23,11 +23,8 @@
       :name: coffee-rails
       :version: "4.2.2"
     -
-      :name: jquery-rails
-      :version: "4.3.1"
-    -
       :name: sass-rails
-      :version: "5.0.6"
+      :version: "5.0.7"
 
 :msvc_runtime:
   :name: MsvcRuntime
@@ -46,11 +43,20 @@
 
 :ruby233:
   :category: component
-  :title: Ruby 2.3.3
+  :title: Ruby 2.4.2
   :name: Ruby233
   :regex: '^.*$'
   :url: "http://dl.bintray.com/oneclick/rubyinstaller/ruby-2.3.3-i386-mingw32.7z"
-  :rename: Ruby2.3.3
+  :rename: Ruby2.4.2
+
+:ruby242:
+  :category: component
+  :title: Ruby 2.4.2
+  :name: Ruby242
+  :regex: '^.*$'
+  #:url: https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.4.2-2/rubyinstaller-2.4.2-2-x64.exe
+  :url: https://github.com/oneclick/rubyinstaller2/releases/download/rubyinstaller-2.4.2-2/rubyinstaller-2.4.2-2-x64.7z
+  :rename: Ruby2.4.2
 
 :git:
   :category: component

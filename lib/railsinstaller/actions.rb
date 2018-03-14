@@ -6,30 +6,36 @@ module RailsInstaller
       BSDTar, SevenZip, DevKit, Git, Ruby233,
       PostgresServer, Sqlite3, Sqlite3Dll
     ]
+    components = [BSDTar, SevenZip, Ruby242, PostgresServer, Sqlite3, Sqlite3Dll]
+    components = []
 
     components.each do |package|
       section  package.title
-      download package.url
+      #download package.url
       extract  package
     end
 
     stage_sqlite
 
-    link_devkit_with_ruby
-
     stage_git
 
-    stage_postgresql
+    # stage_postgresql
 
     stage_todo_application
 
-    stage_gems
+    # stage_gems
+
+    #stage_sample_application
 
     fix_batch_files
 
     stage_setup_scripts
 
     stage_msvc_runtime
+=begin
+    link_devkit_with_ruby
+
+=end
   end
 
   #
@@ -54,7 +60,7 @@ module RailsInstaller
     iscc "\"#{File.join(RailsInstaller::Root, "resources", "railsinstaller", "railsinstaller.iss")}\"",
           "/dInstallerVersion=#{railsinstaller_version}",
           "/dStagePath=\"#{RailsInstaller::Stage}\"",
-          "/dRubyPath=\"#{RailsInstaller::Ruby233.rename}\"",
+          "/dRubyPath=\"#{RailsInstaller::Ruby242.rename}\"",
           "/dResourcesPath=\"#{File.join(RailsInstaller::Root, "resources")}\"",
           "/o\"#{RailsInstaller::PackageDir}\"",
           "/frailsinstaller-#{railsinstaller_version}"
